@@ -3,7 +3,7 @@
  * proper number of blanks to space to the next tab stop. Assume a
  * fixed set of tab stops, say every n columns. Should n be a variable
  * or a symbolic parameter?
- * Because of the lack of specification I wrote several version of the program:
+ * Because of the lack of specification I wrote several versions of the program:
  *
  *      1. My favorite. It's simple and doesn't require any buffer.
  *
