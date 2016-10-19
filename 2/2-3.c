@@ -16,9 +16,10 @@
 int getline(char s[], int lim);
 void copy(char src[], char dest[]);
 void upper(char s[]);
-int withprefix(char s[]);
-void delprefix(char s[], int len);
-int isvalid(char s[], int len);
+int is_with_prefix(char s[]);
+void del_prefix(char s[], int len);
+int is_hex_letter(int c);
+int is_valid_hex(char s[], int len);
 int htoi(char s[]);
 
 int main(void)
@@ -32,8 +33,8 @@ int main(void)
         while ((len = getline(hex, LIM)) > 0) {
                 copy(hex, hex_copy);
                 upper(hex_copy);
-                delprefix(hex_copy, len);
-                if (isvalid(hex_copy, strlen(hex_copy))) {
+                del_prefix(hex_copy, len);
+                if (is_valid_hex(hex_copy, strlen(hex_copy))) {
                         dec = htoi(hex_copy);
                         printf("%d\n", dec);
                 } else
@@ -79,12 +80,12 @@ void upper(char s[])
                 ++i;
 }
 
-int withprefix(char s[])
+int is_with_prefix(char s[])
 {
         return (s[0] == '0' && s[1] == 'X');
 }
 
-void delprefix(char s[], int len)
+void del_prefix(char s[], int len)
 {
         char temp[len];
         int i;
@@ -92,7 +93,7 @@ void delprefix(char s[], int len)
 
         i = 2;
         j = 0;
-        if (withprefix(s)) {
+        if (is_with_prefix(s)) {
                 while ((temp[j] = s[i]) != '\0') {
                         ++i;
                         ++j;
@@ -102,18 +103,18 @@ void delprefix(char s[], int len)
         }
 }
 
-int ishexletter(int c)
+int is_hex_letter(int c)
 {
         return (c >= 'A' && c <= 'F');
 }
 
-int isvalid(char s[], int len)
+int is_valid_hex(char s[], int len)
 {
         int i;
 
         i = 0;
         while (i < len) {
-                if (!isdigit(s[i]) && !ishexletter(s[i]))
+                if (!isdigit(s[i]) && !is_hex_letter(s[i]))
                         return FALSE;
                 ++i;
         }
