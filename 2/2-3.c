@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define LIM   64    /* Maximum string capacity */
+#define LIM   64
 #define TRUE  1
 #define FALSE 0
 
