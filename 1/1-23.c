@@ -9,21 +9,9 @@
 
 #define MAXLEN 1024
 
+int getline(void);
+
 char line[MAXLEN];
-
-int getline(void)
-{
-        int c, i;
-
-        for (i = 0; i < MAXLEN && (c = getchar()) != EOF && c != '\n'; ++i)
-                line[i] = c;
-
-        if (c == '\n')
-                line[i++] = c;
-        line[i] = '\0';
-
-        return i;
-}
 
 int main(void)
 {
@@ -63,4 +51,18 @@ int main(void)
         uncommented[j] = '\0';
         puts(uncommented);
         return 0;
+}
+
+int getline(void)
+{
+        int c, i;
+
+        for (i = 0; i < MAXLEN && (c = getchar()) != EOF && c != '\n'; ++i)
+                line[i] = c;
+
+        if (c == '\n')
+                line[i++] = c;
+        line[i] = '\0';
+
+        return i;
 }
