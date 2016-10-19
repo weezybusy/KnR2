@@ -13,21 +13,21 @@
 #define TRUE  1
 #define FALSE 0
 
-int getline(char s[], int lim);
-void copy(char src[], char dest[]);
+unsigned int getline(char s[], const unsigned int lim);
+void copy(const char src[], char dest[]);
 void upper(char s[]);
-int is_with_prefix(char s[]);
-void del_prefix(char s[], int len);
-int is_hex_letter(int c);
-int is_valid_hex(char s[], int len);
-int htoi(char s[]);
+int is_with_prefix(const char s[]);
+void del_prefix(char s[], const unsigned int len);
+int is_hex_letter(const int c);
+int is_valid_hex(const char s[], const unsigned int len);
+unsigned int htoi(const char s[]);
 
 int main(void)
 {
         char hex[LIM];
         char hex_copy[LIM];
-        int len;
-        int dec;
+        unsigned int len;
+        unsigned int dec;
 
         printf("> ");
         while ((len = getline(hex, LIM)) > 0) {
@@ -36,18 +36,18 @@ int main(void)
                 del_prefix(hex_copy, len);
                 if (is_valid_hex(hex_copy, strlen(hex_copy))) {
                         dec = htoi(hex_copy);
-                        printf("%d\n", dec);
+                        printf("%u\n", dec);
                 } else
-                        puts("It's not a hexadecimal number.");
+                        puts("It's not a hexadecimal number");
                 printf("> ");
         }
         return 0;
 }
 
-int getline(char s[], int lim)
+unsigned int getline(char s[], const unsigned int lim)
 {
         int c;
-        int i;
+        unsigned int i;
 
         i = 0;
         while (i < (lim - 1)) {
@@ -61,9 +61,9 @@ int getline(char s[], int lim)
         return i;
 }
 
-void copy(char src[], char dest[])
+void copy(const char src[], char dest[])
 {
-        int i;
+        unsigned int i;
 
         i = 0;
         while ((dest[i] = src[i]) != '\0')
@@ -73,23 +73,23 @@ void copy(char src[], char dest[])
 
 void upper(char s[])
 {
-        int i;
+        unsigned int i;
 
         i = 0;
         while ((s[i] = toupper(s[i])) != '\0')
                 ++i;
 }
 
-int is_with_prefix(char s[])
+int is_with_prefix(const char s[])
 {
         return (s[0] == '0' && s[1] == 'X');
 }
 
-void del_prefix(char s[], int len)
+void del_prefix(char s[], const unsigned int len)
 {
         char temp[len];
-        int i;
-        int j;
+        unsigned int i;
+        unsigned int j;
 
         i = 2;
         j = 0;
@@ -103,14 +103,14 @@ void del_prefix(char s[], int len)
         }
 }
 
-int is_hex_letter(int c)
+int is_hex_letter(const int c)
 {
         return (c >= 'A' && c <= 'F');
 }
 
-int is_valid_hex(char s[], int len)
+int is_valid_hex(const char s[], const unsigned int len)
 {
-        int i;
+        unsigned int i;
 
         i = 0;
         while (i < len) {
@@ -121,10 +121,10 @@ int is_valid_hex(char s[], int len)
         return TRUE;
 }
 
-int htoi(char s[])
+unsigned int htoi(const char s[])
 {
-        int n;
-        int i;
+        unsigned int n;
+        unsigned int i;
 
         n = 0;
         i = 0;
