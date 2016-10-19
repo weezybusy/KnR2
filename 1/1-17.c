@@ -1,5 +1,6 @@
 /*
- * 1-17
+ * Exercise 1-17
+ *
  * Write a program to print all input lines that are longer than 80 characters.
  * Commented variant limits line length to 1000 characters and uncommented
  * variant do not.
