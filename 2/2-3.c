@@ -16,7 +16,7 @@
 unsigned int getline(char s[], const unsigned int lim);
 void copy(const char src[], char dest[]);
 void upper(char s[]);
-int is_with_prefix(const char s[]);
+int is_prefixed(const char s[]);
 void del_prefix(char s[], const unsigned int len);
 int is_hex_letter(const int c);
 int is_valid_hex(const char s[], const unsigned int len);
@@ -80,7 +80,7 @@ void upper(char s[])
                 ++i;
 }
 
-int is_with_prefix(const char s[])
+int is_prefixed(const char s[])
 {
         return (s[0] == '0' && s[1] == 'X');
 }
@@ -93,7 +93,7 @@ void del_prefix(char s[], const unsigned int len)
 
         i = 2;
         j = 0;
-        if (is_with_prefix(s)) {
+        if (is_prefixed(s)) {
                 while ((temp[j] = s[i]) != '\0') {
                         ++i;
                         ++j;
