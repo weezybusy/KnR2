@@ -113,7 +113,8 @@ int isvalid(char s[], int len)
 
         i = 0;
         while (i < len) {
-                if (!isdigit(s[i]) && !ishexletter(s[i])) return FALSE;
+                if (!isdigit(s[i]) && !ishexletter(s[i]))
+                        return FALSE;
                 ++i;
         }
         return TRUE;
@@ -121,10 +122,11 @@ int isvalid(char s[], int len)
 
 int htoi(char s[])
 {
-        int n = 0;
-        int i = 0;
+        int n;
+        int i;
 
-        n = i = 0;
+        n = 0;
+        i = 0;
         while (s[i] != '\0') {
                 n = 16 * n + (isdigit(s[i]) ? (s[i] - '0') : (s[i] - '7'));
                 ++i;
