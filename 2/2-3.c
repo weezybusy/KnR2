@@ -129,7 +129,7 @@ unsigned int htoi(const char s[])
         n = 0;
         i = 0;
         while (s[i] != '\0') {
-                n = 16 * n + (isdigit(s[i]) ? (s[i] - '0') : (s[i] - '7'));
+                n = 16 * n + (isdigit(s[i]) ? (s[i] - '0') : (s[i] - 'A' + 10));
                 ++i;
         }
         return n;
