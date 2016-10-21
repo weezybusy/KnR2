@@ -6,6 +6,7 @@
  * bits unchanged.
  */
 
+#include <assert.h>
 #include <stdio.h>
 
 unsigned setbits(unsigned x, int p, int n, unsigned y);
@@ -20,7 +21,7 @@ int main(void)
         p = 4;
         n = 3;
 
-        printf("%u\n", setbits(x, p, n, y));
+        assert(setbits(x, p, n, y) == 17);
 
         return 0;
 }
