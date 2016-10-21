@@ -13,15 +13,7 @@ unsigned invert(unsigned x, int p, int n);
 
 int main(void)
 {
-        unsigned x;
-        int p, n;
-
-        x = 7;
-        p = 2;
-        n = 2;
-
-        assert(invert(x, p, n) == 1);
-
+        assert(invert(7, 2, 2) == 1);
         return 0;
 }
 

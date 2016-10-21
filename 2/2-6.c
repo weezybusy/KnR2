@@ -13,16 +13,7 @@ unsigned setbits(unsigned x, int p, int n, unsigned y);
 
 int main(void)
 {
-        unsigned x, y;
-        int p, n;
-
-        x = 21;
-        y = 28;
-        p = 4;
-        n = 3;
-
-        assert(setbits(x, p, n, y) == 17);
-
+        assert(setbits(21, 4, 3, 28) == 17);
         return 0;
 }
 
