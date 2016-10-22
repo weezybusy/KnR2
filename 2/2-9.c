@@ -13,7 +13,11 @@ int bitcount(unsigned x);
 
 int main(void)
 {
-        printf("%d\n", bitcount(15));
+        assert(bitcount(0) == 0);
+        assert(bitcount(2) == 1);
+        assert(bitcount(5) == 2);
+        assert(bitcount(7) == 3);
+
         return 0;
 }
 
