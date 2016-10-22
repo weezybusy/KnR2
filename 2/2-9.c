@@ -17,6 +17,7 @@ int main(void)
         assert(bitcount(2) == 1);
         assert(bitcount(5) == 2);
         assert(bitcount(7) == 3);
+        puts("success");
 
         return 0;
 }
