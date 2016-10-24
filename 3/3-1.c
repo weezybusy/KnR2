@@ -6,7 +6,6 @@
  * inside the loop and measure the difference in run-time.
  */
 
-#include <assert.h>
 #include <stdio.h>
 #include <time.h>
 
