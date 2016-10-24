@@ -12,8 +12,8 @@
 #define LIM 20000
 #define N -1
 
-int binary_search(int elem, int ar[], int len);  /* K&R */
-int binary_search2(int elem, int ar[], int len); /* New */
+int binary_search(int elem, int data[], int len);  /* K&R */
+int binary_search2(int elem, int data[], int len); /* New */
 void print_results(int index, char name[], double time_taken);
 
 int main(void)
@@ -48,7 +48,7 @@ int main(void)
 }
 
 /* K&R */
-int binary_search(int elem, int ar[], int len)
+int binary_search(int elem, int data[], int len)
 {
         int low;
         int high;
@@ -59,9 +59,9 @@ int binary_search(int elem, int ar[], int len)
 
         while (low <= high) {
                 mid = (low + high) / 2;
-                if (ar[mid] == elem)
+                if (data[mid] == elem)
                         return mid;
-                else if (ar[mid] < elem)
+                else if (data[mid] < elem)
                         low = mid + 1;
                 else
                         high = mid - 1;
@@ -70,7 +70,7 @@ int binary_search(int elem, int ar[], int len)
 }
 
 /* New */
-int binary_search2(int elem, int ar[], int len)
+int binary_search2(int elem, int data[], int len)
 {
         int low;
         int high;
@@ -81,12 +81,12 @@ int binary_search2(int elem, int ar[], int len)
 
         while (low < high) {
                 mid = (low + high) / 2;
-                if (ar[mid] < elem)
+                if (data[mid] < elem)
                         low = mid + 1;
                 else
                         high = mid;
         }
-        return (ar[low] == elem) ? low : -1;
+        return (data[low] == elem) ? low : -1;
 }
 
 void print_results(int index, char name[], double time_taken)
