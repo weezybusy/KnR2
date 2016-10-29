@@ -12,7 +12,6 @@
 #include <string.h>
 
 #define LIM 128
-#define WORDSIZE 8
 
 void itoa(int n, char s[]);
 void reverse(char s[]);
