@@ -77,9 +77,6 @@ void expand(char s1[], char s2[])
 
 int expandable(int a, int b, int c)
 {
-        /* To be expandable `a' and `c' must be numbers or letters
-           of the same case, and `b' must be a dash */
-
         int valid_letters;
         int valid_digits;
 
