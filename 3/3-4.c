@@ -60,9 +60,9 @@ void reverse(char s[])
         start = 0;
         end = strlen(s) - 1;
 
-        do {
+        while (start < end) {
                 temp = s[start];
-                s[start] = s[end];
-                s[end] = temp;
-        } while (start++ < end--);
+                s[start++] = s[end];
+                s[end--] = temp;
+        }
 }
