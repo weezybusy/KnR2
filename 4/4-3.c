@@ -6,9 +6,9 @@
  */
 
 #include <ctype.h>
+#include <math.h>   /* for fmod() */
 #include <stdio.h>
 #include <stdlib.h> /* for atof() */
-#include <math.h>   /* for fmod() */
 
 #define MAXOP   100  /* max size of operand or operator */
 #define NUMBER  '0'  /* signal that a number was found */
@@ -16,7 +16,7 @@
 int getop(char []);
 void push(double);
 double pop(void);
-int sign = 1;
+int sign = 1;        /* -1 if operand is negative */
 
 /* reverse Polish calculator */
 int main(void)
@@ -29,7 +29,7 @@ int main(void)
                 switch (type) {
                 case NUMBER:
                         push(atof(s) * sign);
-                        sign = 1;
+                        sign = 1;    /* reset sign */
                         break;
                 case '+':
                         push(pop() + pop());
@@ -104,23 +104,24 @@ int getop(char s[])
         s[1] = '\0';
 
         if (c == '-') {
+                /* if next character is digit, it's a sign */
                 if (isdigit(temp = getch())) {
                         s[0] = temp;
                         c = temp;
                         sign = -1;
                 } else
-                        ungetch(temp);
+                        ungetch(temp); /* it's not a sign */
         }
 
         if (!isdigit(c) && c != '.')
-                return c;             /* not a number */
+                return c;              /* not a number */
 
         i = 0;
-        if (isdigit(c))               /* collect integer part */
+        if (isdigit(c))                /* collect integer part */
                 while (isdigit(s[++i] = c = getch()))
                         continue;
 
-        if (c == '.')                 /* collect fraction part */
+        if (c == '.')                  /* collect fraction part */
                 while (isdigit(s[++i] = c = getch()))
                         continue;
         s[i] = '\0';
