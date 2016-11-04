@@ -20,7 +20,6 @@ void printtop(void);
 void dupetop(void);
 void swaptop(void);
 void clrstack(void);
-void mathy(int op);
 
 int sign = 1;        /* -1 if operand is negative */
 int popallowed = 1;   /* 0 if pop is not allowed when pressed Enter */
