@@ -120,9 +120,9 @@ void printtop(void)
 {
         /* printtop: prints the top element of the stack without popping */
 
-        if (sp > 0) {
+        if (sp > 0)
                 printf("%g\n", val[sp-1]);
-        } else
+        else
                 printf("nothing to show\n");
 
         popallowed = 0;
