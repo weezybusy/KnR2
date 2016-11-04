@@ -23,7 +23,7 @@ void swaptop(void);
 void clrstack(void);
 
 int sign = 1;        /* -1 if operand is negative */
-int popallowed = 1   /* 0 if pop is not allowed when pressed Enter */
+int popallowed = 1;   /* 0 if pop is not allowed when pressed Enter */
 
 int main(void)
 {
@@ -69,16 +69,16 @@ int main(void)
                         else
                                 popallowed = 1;
                         break;
-                case 'p':
+                case '?':
                         printtop();
                         break;
-                case 'd':
+                case '&':
                         dupetop();
                         break;
-                case 's':
+                case '$':
                         swaptop();
                         break;
-                case 'c':
+                case '!':
                         clrstack();
                         break;
                 default:
@@ -123,7 +123,7 @@ void printtop(void)
         if (sp > 0) {
                 printf("%g\n", val[sp-1]);
         } else
-                printf("Nothing to show\n");
+                printf("nothing to show\n");
 
         popallowed = 0;
 }
@@ -139,9 +139,7 @@ void dupetop(void)
                 push(temp);
                 push(temp);
         } else
-                printf("Nothing to duplicate\n");
-
-        popallowed = 0;
+                printf("nothing to duplicate\n");
 }
 
 void swaptop(void)
@@ -158,9 +156,7 @@ void swaptop(void)
                 push(temp1);
                 push(temp2);
         } else
-                printf("Have less then two values in stack.\n");
-
-        popallowed = 0;
+                printf("have less then two values in stack\n");
 }
 
 void clrstack(void)
@@ -168,6 +164,8 @@ void clrstack(void)
         /* clrstack: clears the stack */
 
         sp = 0;
+        printf("stack was creared\n");
+        popallowed = 0;
 }
 
 int getch(void);
