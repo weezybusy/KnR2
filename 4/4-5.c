@@ -1,9 +1,8 @@
 /*
  * Exercise 4-4
  *
- * Add commands to print the top element of the stack without popping, to
- * duplicate it, and to swap the top two elements. Add a command to clear the
- * stack.
+ * Add access to library functions like sin, exp, and pow. See <math.h> in
+ * Appendix B, Section 4.
  */
 
 #include <ctype.h>
@@ -21,6 +20,7 @@ void printtop(void);
 void dupetop(void);
 void swaptop(void);
 void clrstack(void);
+void mathy(int op);
 
 int sign = 1;        /* -1 if operand is negative */
 int popallowed = 1;   /* 0 if pop is not allowed when pressed Enter */
@@ -81,8 +81,27 @@ int main(void)
                 case '!':
                         clrstack();
                         break;
+                case 's':
+                        push(sin(pop()));
+                        break;
+                case 'c':
+                        push(cos(pop()));
+                        break;
+                case 'e':
+                        push(exp(pop()));
+                        break;
+                case 'q':
+                        push(sqrt(pop()));
+                        break;
+                case 'p':
+                        op2 = pop();
+                        push(pow(pop(), op2));
+                        break;
+                case 'l':
+                        push(log(pop()));
+                        break;
                 default:
-                        printf("error: unknown command %s\n", s);
+                        printf("error: unknown command\n");
                         break;
                 }
         }
