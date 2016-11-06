@@ -9,9 +9,15 @@
 #include <math.h>   /* for fmod() */
 #include <stdio.h>
 #include <stdlib.h> /* for atof() */
+#include <string.h> /* for strlen() */
 
-#define MAXOP   100  /* max size of operand or operator */
-#define NUMBER  '0'  /* signal that a number was found */
+#define MAXOP  100  /* max size of operand or operator */
+#define NUMBER '0'  /* signal that a number was found */
+#define COS    '1'  /* signal that a cos function was found */
+#define SIN    '2'  /* signal that a sin function was found */
+#define POW    '3'  /* signal that a pow function was found */
+#define EXP    '4'  /* signal that a exp function was found */
+#define SQRT   '5'  /* signal that a sqrt function was found */
 
 int getop(char []);
 void push(double);
@@ -20,9 +26,10 @@ void printtop(void);
 void dupetop(void);
 void swaptop(void);
 void clrstack(void);
+int cmp(char s1[], char s2[]);
 
 int sign = 1;        /* -1 if operand is negative */
-int popallowed = 1;   /* 0 if pop is not allowed when pressed Enter */
+int popallowed = 1;  /* 0 if pop is not allowed when pressed Enter */
 
 int main(void)
 {
@@ -37,6 +44,22 @@ int main(void)
                 case NUMBER:
                         push(atof(s) * sign);
                         sign = 1;    /* reset sign */
+                        break;
+                case SIN:
+                        push(sin(pop()));
+                        break;
+                case COS:
+                        push(cos(pop()));
+                        break;
+                case EXP:
+                        push(exp(pop()));
+                        break;
+                case POW:
+                        op2 = pop();
+                        push(pow(pop(), op2));
+                        break;
+                case SQRT:
+                        push(sqrt(pop()));
                         break;
                 case '+':
                         push(pop() + pop());
@@ -79,25 +102,6 @@ int main(void)
                         break;
                 case '!':
                         clrstack();
-                        break;
-                case 's':
-                        push(sin(pop()));
-                        break;
-                case 'c':
-                        push(cos(pop()));
-                        break;
-                case 'e':
-                        push(exp(pop()));
-                        break;
-                case 'q':
-                        push(sqrt(pop()));
-                        break;
-                case 'p':
-                        op2 = pop();
-                        push(pow(pop(), op2));
-                        break;
-                case 'l':
-                        push(log(pop()));
                         break;
                 default:
                         printf("error: unknown command\n");
@@ -186,12 +190,30 @@ void clrstack(void)
         popallowed = 0;
 }
 
+int cmp(char s1[], char s2[])
+{
+        /* cmp: compares two strings.
+                returns 1 if they are equal, 0 otherwise */
+
+        int i;
+
+        if (strlen(s1) != strlen(s2))
+                return 0;
+        i = 0;
+        while (s1[i] == s2[i] && i < strlen(s1))
+                ++i;
+        if (s1[i] != '\0')
+                return 0;
+
+        return 1;
+}
+
 int getch(void);
 void ungetch(int);
 
 int getop(char s[])
 {
-        /* getop: get next character or numeric operand */
+        /* getop: get next character, numeric operand or math function */
 
         int i, c, temp;
 
@@ -210,14 +232,35 @@ int getop(char s[])
                         ungetch(temp); /* it's not a sign */
         }
 
-        if (!isdigit(c) && c != '.')
-                return c;              /* not a number */
+        if (!isalnum(c) && c != '.')
+                return c;    /* not a number or a math function */
 
         i = 0;
+        if (isalpha(c)) {         /* get math function name */
+                while (isalpha(s[++i] = c = getch()))
+                        continue;
+                s[i] = '\0';
+
+                if (c != EOF)
+                        ungetch(c);
+
+                if (cmp(s, "sin"))
+                        return SIN;
+                else if (cmp(s, "cos"))
+                        return COS;
+                else if (cmp(s, "exp"))
+                        return EXP;
+                else if (cmp(s, "pow"))
+                        return POW;
+                else if (cmp(s, "sqrt"))
+                        return SQRT;
+                else
+                        return '_'; /* not a math function */
+        }
+
         if (isdigit(c))                /* collect integer part */
                 while (isdigit(s[++i] = c = getch()))
                         continue;
-
         if (c == '.')                  /* collect fraction part */
                 while (isdigit(s[++i] = c = getch()))
                         continue;
