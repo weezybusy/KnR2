@@ -133,7 +133,7 @@ double pop(void)
         if (sp > 0)
                 return val[--sp];
         else {
-                printf("error: stack empty\n");
+                printf("error: stack is empty\n");
                 return 0.0;
         }
 }
@@ -145,7 +145,7 @@ void printtop(void)
         if (sp > 0)
                 printf("%g\n", val[sp-1]);
         else
-                printf("nothing to show\n");
+                printf("error: nothing to show\n");
 
         popallowed = 0;
 }
@@ -161,7 +161,7 @@ void dupetop(void)
                 push(temp);
                 push(temp);
         } else
-                printf("nothing to duplicate\n");
+                printf("error: nothing to duplicate\n");
 }
 
 void swaptop(void)
@@ -178,7 +178,7 @@ void swaptop(void)
                 push(temp1);
                 push(temp2);
         } else
-                printf("have less then two values in stack\n");
+                printf("error: have less then two values in stack\n");
 }
 
 void clrstack(void)
@@ -186,7 +186,7 @@ void clrstack(void)
         /* clrstack: clears the stack */
 
         sp = 0;
-        printf("stack was creared\n");
+        printf("stack was cleared\n");
         popallowed = 0;
 }
 
@@ -233,10 +233,10 @@ int getop(char s[])
         }
 
         if (!isalnum(c) && c != '.')
-                return c;    /* not a number or a math function */
+                return c; /* not a number or a math function */
 
         i = 0;
-        if (isalpha(c)) {         /* get math function name */
+        if (isalpha(c)) { /* get math function name */
                 while (isalpha(s[++i] = c = getch()))
                         continue;
                 s[i] = '\0';
@@ -258,10 +258,10 @@ int getop(char s[])
                         return '_'; /* not a math function */
         }
 
-        if (isdigit(c))                /* collect integer part */
+        if (isdigit(c)) /* collect integer part */
                 while (isdigit(s[++i] = c = getch()))
                         continue;
-        if (c == '.')                  /* collect fraction part */
+        if (c == '.') /* collect fraction part */
                 while (isdigit(s[++i] = c = getch()))
                         continue;
         s[i] = '\0';
@@ -274,8 +274,8 @@ int getop(char s[])
 
 #define BUFSIZE 100
 
-char buf[BUFSIZE];   /* buffer for ungetch */
-int bufp = 0;        /* next free position in buf */
+char buf[BUFSIZE]; /* buffer for ungetch */
+int bufp = 0;      /* next free position in buf */
 
 int getch(void)
 {
