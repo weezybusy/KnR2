@@ -28,7 +28,9 @@ int main(void)
         return 0;
 }
 
-int buf = EOF; /* buffer for ungetch() */
+#define EMPTY -2
+
+int buf = EMPTY; /* buffer for ungetch() */
 
 int getch(void)
 {
@@ -36,9 +38,9 @@ int getch(void)
 
         int tmp;
 
-        if (buf != EOF) {
+        if (buf != EMPTY) {
                 tmp = buf;
-                buf = EOF;
+                buf = EMPTY;
         } else
                 tmp = getchar();
         return tmp;
@@ -48,7 +50,7 @@ void ungetch(int c)
 {
         /* ungetch: push character back on input */
 
-        if (buf != EOF)
+        if (buf != EMPTY)
                 puts("ungetch: no space left.");
         else
                 buf = c;
