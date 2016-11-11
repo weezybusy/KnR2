@@ -32,7 +32,7 @@ int buf = EOF; /* buffer for ungetch() */
 
 int getch(void)
 {
-        /* get a (possibly pushed back) character */
+        /* getch: get a (possibly pushed back) character */
 
         int tmp;
 
@@ -46,7 +46,7 @@ int getch(void)
 
 void ungetch(int c)  
 {
-        /* push character back on input */
+        /* ungetch: push character back on input */
 
         if (buf != EOF)
                 puts("ungetch: no space left.");
