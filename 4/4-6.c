@@ -29,7 +29,7 @@ void print(void);
 void dup(void);
 void swap(void);
 void clear(void);
-int ctoi(int c);
+int ctoi(int);
 
 int sign = 1;        /* -1 if operand is negative */
 int popallowed = 1;  /* 0 if pop is not allowed when pressed Enter */
