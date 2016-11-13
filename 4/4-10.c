@@ -12,16 +12,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAXOP   128  /* max size of operand or operator */
-#define MAXEXPR 128  /* maximum expression length */
-#define VARNUM  26   /* number of available variables */
-#define NUMBER  '0'  /* signal that a number was found */
-#define VAR     '1'  /* signal that a variable was found */
-#define COS     '2'  /* signal that a cos function was found */
-#define SIN     '3'  /* signal that a sin function was found */
-#define POW     '4'  /* signal that a pow function was found */
-#define EXP     '5'  /* signal that a exp function was found */
-#define SQRT    '6'  /* signal that a sqrt function was found */
+#define MAXOP    128  /* max size of operand or operator */
+#define MAXEXPR  128  /* maximum expression length */
+#define MAXVARS  26   /* number of available variables */
+#define NUM      '0'  /* signal that a number was found */
+#define VAR      '1'  /* signal that a variable was found */
+#define COS      '2'  /* signal that a cos function was found */
+#define SIN      '3'  /* signal that a sin function was found */
+#define POW      '4'  /* signal that a pow function was found */
+#define EXP      '5'  /* signal that a exp function was found */
+#define SQRT     '6'  /* signal that a sqrt function was found */
 
 int getop(char []);
 void push(double);
@@ -46,17 +46,22 @@ int main(void)
         int type;
         double op2;
         char s[MAXOP];
+
         /* variable for recently printed value */
         double recent;
+
         /* contains values of every of 26 variables */
-        double varvals[VARNUM]; 
-        /* contains statuses for every of 26 variables.
-           If status is 0, variable has no value yet,
-           otherwise it has some value */
-        int varstats[VARNUM] = { 0 };
+        double varvals[MAXVARS];
+
+        /* contains statuses for every of 26 variables,
+           if status is 0, variable has no value yet,
+           if status is 1, it has some value */
+        int varstats[MAXVARS] = { 0 };
+
         /* position in varvals[] and varstats[] */
         int varpos;
-        /* expression string length */
+
+        /* length of expression string */
         unsigned elen;
 
         while (getline(expr, MAXEXPR) > 1) {
@@ -65,7 +70,7 @@ int main(void)
                 while (epos < elen) {
                         type = getop(s);
                         switch (type) {
-                        case NUMBER:
+                        case NUM:
                                 push(atof(s) * sign);
                                 sign = 1; /* reset sign */
                                 break;
@@ -288,7 +293,7 @@ int getop(char s[])
                         continue;
         s[i] = '\0';
 
-        return NUMBER;
+        return NUM;
 }
 
 int ctoi(int c)
