@@ -88,10 +88,10 @@ int getop(char s[])
         /* getop: get next character or numeric operand */
 
         int i, c;
-        static int buf = EOF;
+        static int buf;
 
-        s[0] = c = (buf != EOF) ? buf : getchar();
-        buf = EOF;
+        s[0] = c = (buf) ? buf : getchar();
+        buf = 0;
 
         while (c == ' ' || c == '\t') {
                 s[0] = c = getchar();
