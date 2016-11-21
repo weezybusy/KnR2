@@ -44,7 +44,7 @@ int getint(int *pn)
         if (c == '+' || c == '-') {
                 c = getch();
                 if (!isdigit(c)) {
-                        /* push both character back on input */
+                        /* push both characters back on input */
                         ungetch((sign == 1) ? '+' : '-');
                         ungetch(c);
                         return 0;
