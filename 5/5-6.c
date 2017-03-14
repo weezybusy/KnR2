@@ -149,8 +149,12 @@ int getline(char *s, size_t n)
 
         for (i = 0; i < n - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
                 *s++ = c;
-        if (c == '\n')
+
+        if (c == '\n') {
                 *s++ = '\n';
+                ++i;
+        }
+
         *s = '\0';
 
         return i;
