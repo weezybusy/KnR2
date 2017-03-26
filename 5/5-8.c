@@ -25,7 +25,6 @@ int main(void)
         year = 1984;
         year_day = 287;
 
-
         if ((day = day_of_year(year, month, day)) != -1)
                 printf("%i\n", day);
 
