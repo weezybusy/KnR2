@@ -44,6 +44,11 @@ int day_of_year(int year, int month, int day)
         int i;
         int leap;
         char *p;
+        
+        if (year < 1752) {
+                fprintf(stderr, "Invalid year.\n");
+                return -1;
+        }
 
         if (month < 1 || month > 12) {
                 fprintf(stderr, "Invalid month.\n");
@@ -51,8 +56,8 @@ int day_of_year(int year, int month, int day)
         }
 
         leap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-
         p = &daytab[leap][1];
+
         if (day < 1 || day > *(p + month)) {
                 fprintf(stderr, "Invalid day.\n");
                 return -1;
@@ -75,6 +80,11 @@ int month_day(int year, int year_day, int *pmonth, int *pday)
                 return -1;
         }
 
+        if (year < 1752) {
+                fprintf(stderr, "Invalid year.\n");
+                return -1;
+        }
+
         leap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 
         if (year_day < 1 || year_day > DAYS_IN_YEAR + leap) {
@@ -83,6 +93,7 @@ int month_day(int year, int year_day, int *pmonth, int *pday)
         }
 
         p = &daytab[leap][1];
+
         for (i = 1; year_day > *(p + i); ++i)
                 year_day -= *(p + i);
 

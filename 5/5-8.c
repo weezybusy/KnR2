@@ -25,6 +25,7 @@ int main(void)
         year = 1984;
         year_day = 287;
 
+
         if ((day = day_of_year(year, month, day)) != -1)
                 printf("%i\n", day);
 
@@ -48,6 +49,7 @@ int day_of_year(int year, int month, int day)
                 fprintf(stderr, "Invalid year.\n");
                 return -1;
         }
+
         if (month < 1 || month > 12) {
                 fprintf(stderr, "Invalid month.\n");
                 return -1;
@@ -73,6 +75,11 @@ int month_day(int year, int year_day, int *pmonth, int *pday)
 
         if (pmonth == NULL || pday == NULL) {
                 fprintf(stderr, "Null pointer error.\n");
+                return -1;
+        }
+
+        if (year < 1752) {
+                fprintf(stderr, "Invalid year.\n");
                 return -1;
         }
 
